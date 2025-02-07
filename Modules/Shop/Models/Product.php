@@ -4,7 +4,7 @@ namespace Modules\Shop\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-// use Modules\Shop\Database\Factories\ProductFactory;
+use Modules\Shop\Database\Factories\ProductFactory;
 
 class Product extends Model
 {
@@ -73,22 +73,22 @@ class Product extends Model
 
     public function inventory()
     {
-        return $this->hasOne('Modules\Shop\Entities\ProductInventory');
+        return $this->hasOne('Modules\Shop\Models\ProductInventory');
     }
 
     public function variants()
 	{
-		return $this->hasMany('Modules\Shop\Entities\Product', 'parent_id')->orderBy('price', 'ASC');
+		return $this->hasMany('Modules\Shop\Models\Product', 'parent_id')->orderBy('price', 'ASC');
 	}
 
     public function categories()
     {
-        return $this->belongsToMany('Modules\Shop\Entities\Category', 'shop_categories_products', 'product_id', 'category_id'); //phpcs:ignore
+        return $this->belongsToMany('Modules\Shop\Models\Category', 'shop_categories_products', 'product_id', 'category_id'); //phpcs:ignore
     }
 
     public function tags()
     {
-        return $this->belongsToMany('Modules\Shop\Entities\Tag', 'shop_products_tags', 'product_id', 'tag_id');
+        return $this->belongsToMany('Modules\Shop\Models\Tag', 'shop_products_tags', 'product_id', 'tag_id');
     }
 
     public function attributes()
@@ -98,7 +98,7 @@ class Product extends Model
 
     public function images()
 	{
-		return $this->hasMany('Modules\Shop\Entities\ProductImage', 'product_id');
+		return $this->hasMany('Modules\Shop\Models\ProductImage', 'product_id');
 	}
 
 

@@ -43,7 +43,7 @@ class Attribute extends Model
 
     public function options()
     {
-        return $this->hasMany('Modules\Shop\Entities\AttributeOption', 'attribute_id');
+        return $this->hasMany('Modules\Shop\Models\AttributeOption', 'attribute_id');
     }
 
     public static function setDefaultAttributes()
