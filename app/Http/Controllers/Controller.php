@@ -9,4 +9,15 @@ use Illuminate\Routing\Controller as BaseController;
 class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
+
+    protected $data = [];
+    protected $perPage = 10;
+
+    public function __construct(){
+
+    }
+
+    protected function loadTheme($view, $data = []){
+        return view('themes/'. env('APP_THEME') . '/' . $view , $data);
+    }
 }
