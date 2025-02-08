@@ -2,19 +2,22 @@
 
 namespace Modules\Shop\Providers;
 
-use App\Http\Controllers\Controller;
-
-
-use Illuminate\Support\Facades\Blade;
-use Illuminate\Support\ServiceProvider;
-use Nwidart\Modules\Facades\Module;
-use Nwidart\Modules\Traits\PathNamespace;
-use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 
-// Tambahkan dua provider ini jika belum ada
+
+use RecursiveDirectoryIterator;
+use Nwidart\Modules\Facades\Module;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\ServiceProvider;
+use Nwidart\Modules\Traits\PathNamespace;
 use Modules\Shop\Providers\EventServiceProvider;
 use Modules\Shop\Providers\RouteServiceProvider;
+
+// Tambahkan dua provider ini jika belum ada
+use Modules\Shop\Repositories\Front\Interfaces\ProductRepositoryInterface;
+use Modules\Shop\Repositories\Front\ProductRepository;
+
 
 class ShopServiceProvider extends ServiceProvider
 {
@@ -33,6 +36,7 @@ class ShopServiceProvider extends ServiceProvider
         $this->registerTranslations();
         $this->registerConfig();
         $this->registerViews();
+        $this->registerRepositories();
 
         if (function_exists('module_path')) {
             $this->loadMigrationsFrom(module_path($this->name, 'database/migrations'));
@@ -143,5 +147,13 @@ class ShopServiceProvider extends ServiceProvider
         }
 
         return $paths;
+    }
+
+    private function registerRepositories()
+    {
+        $this->app->bind(
+            ProductRepositoryInterface::class,
+            ProductRepository::class
+        );
     }
 }

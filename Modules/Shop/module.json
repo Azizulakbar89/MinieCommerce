@@ -6,6 +6,8 @@
     "priority": 0,
     "providers": [
     "Modules\\Shop\\Providers\\ShopServiceProvider"],
-    "files": []
+    "files": [
+        "Helpers/shop_helper.php"
+    ]
     
 }

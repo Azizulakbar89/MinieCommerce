@@ -102,6 +102,7 @@ class Product extends Model
 	}
 
 
+    // label harga
     public function getPriceLabelAttribute()
     {
         return number_format($this->price);
@@ -117,6 +118,7 @@ class Product extends Model
         return number_format($this->sale_price);
     }
 
+    // label diskon
     public function getDiscountPercentAttribute()
     {
         $discountPercent = (($this->price - $this->sale_price) / $this->price) * 100;
@@ -137,4 +139,5 @@ class Product extends Model
 
         return $this->inventory->qty;
     }
+
 }
