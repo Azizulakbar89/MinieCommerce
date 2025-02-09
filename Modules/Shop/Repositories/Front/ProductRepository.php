@@ -2,14 +2,13 @@
 
 namespace Modules\Shop\Repositories\Front;
 
-use Modules\Shop\Models\Tag;
-use Modules\Shop\Models\Product;
 use Modules\Shop\Models\Category;
+use Modules\Shop\Models\Product;
+use Modules\Shop\Models\Tag;
 use Modules\Shop\Repositories\Front\Interfaces\ProductRepositoryInterface;
 
+class ProductRepository implements ProductRepositoryInterface {
 
-class ProductRepository implements ProductRepositoryInterface
-{
     public function findAll($options = [])
     {
         $perPage = $options['per_page'] ?? null;
