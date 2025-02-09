@@ -15,7 +15,11 @@ class Category extends Model
      */
     protected $table = 'shop_categories';
     protected $fillable = ['parent_id', 'slug', 'name'];
-
+    
+    protected static function newFactory(): CategoryFactory
+    {
+        return CategoryFactory::new();
+    }
     /**
      * Relasi ke kategori anak.
      */
@@ -23,7 +27,7 @@ class Category extends Model
     {
         return $this->hasMany(Category::class, 'parent_id');
     }
-
+    
     /**
      * Relasi ke kategori induk.
      */
@@ -45,11 +49,24 @@ class Category extends Model
         );
     }
 
+    public static function childIDs($parentID = null)
+    {
+        $categories = Category::select('id', 'name', 'parent_id')
+            ->where('parent_id', $parentID)
+            ->get();
+        
+        $childIDs = [];
+        if (!empty($categories)) {
+            foreach ($categories as $category) {
+                $childIDs[] = $category->id;
+                $childIDs = array_merge($childIDs, Category::childIDs($category->id));
+            }
+        }
+
+        return $childIDs;
+    }
+
     /**
      * Menghubungkan dengan factory untuk seeding.
      */
-    protected static function newFactory(): CategoryFactory
-    {
-        return CategoryFactory::new();
-    }
 }

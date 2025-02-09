@@ -18,6 +18,9 @@ use Modules\Shop\Providers\RouteServiceProvider;
 use Modules\Shop\Repositories\Front\Interfaces\ProductRepositoryInterface;
 use Modules\Shop\Repositories\Front\ProductRepository;
 
+use Modules\Shop\Repositories\Front\Interfaces\CategoryRepositoryInterface;
+use Modules\Shop\Repositories\Front\CategoryRepository;
+
 
 class ShopServiceProvider extends ServiceProvider
 {
@@ -155,5 +158,11 @@ class ShopServiceProvider extends ServiceProvider
             ProductRepositoryInterface::class,
             ProductRepository::class
         );
+
+        $this->app->bind(
+            CategoryRepositoryInterface::class,
+            CategoryRepository::class
+        );
+
     }
 }
