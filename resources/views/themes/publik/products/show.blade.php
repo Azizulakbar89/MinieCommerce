@@ -43,12 +43,12 @@
                         <small class="pt-1">(99 Reviews)</small>
                     </div>
                     @if ($product->hasSalePrice)
-                        <h3 class="font-weight-semi-bold mb-4">Rp. {{ $product->price_label }}</h3>
+                        <h3 class="font-weight-semi-bold mb-4">IDR {{ $product->sale_price_label }}</h3>
                         <h6 class="text-muted ml-2"><del>{{ $product->discountPercent }}</del></h6>
                     @else
-                        <h3 class="font-weight-semi-bold mb-4">Rp. {{ $product->price_label }}</h3>
+                        <h3 class="font-weight-semi-bold mb-4">IDR {{ $product->price_label }}</h3>
                     @endif
-                    <p class="mb-4">{!!$product->excerpt!!}</p>
+                    <p class="mb-4">{!! $product->excerpt !!}</p>
                     {{-- <div class="d-flex mb-3">
                         <strong class="text-dark mr-3">Sizes:</strong>
                         <form>
@@ -75,25 +75,33 @@
                         </form>
                     </div> --}}
                     <div class="d-flex mb-4">
+
                         <strong class="text-dark mr-3">Stok:</strong> {{ $product->stock_status_label }}
                     </div>
+
+                    @include ('themes.publik.master.flash')
+                    {{ html()->form('POST', route('carts.store'))->open() }}
+                    <input type="hidden" name="product_id" value="{{ $product->id }}" />
                     <div class="d-flex align-items-center mb-4 pt-2">
                         <div class="input-group quantity mr-3" style="width: 130px;">
                             <div class="input-group-btn">
-                                <button class="btn btn-primary btn-minus">
+                                <button type="button" class="btn btn-primary btn-minus">
                                     <i class="fa fa-minus"></i>
                                 </button>
                             </div>
-                            <input type="text" class="form-control bg-secondary border-0 text-center" value="1">
+                            <input type="text" name="qty" class="form-control bg-secondary border-0 text-center"
+                                value="1" min="1">
                             <div class="input-group-btn">
-                                <button class="btn btn-primary btn-plus">
+                                <button type="button" class="btn btn-primary btn-plus">
                                     <i class="fa fa-plus"></i>
                                 </button>
                             </div>
                         </div>
-                        <button class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To
-                            Cart</button>
+                        <button type="submit" class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To
+                            Cart
+                        </button>
                     </div>
+                    {{ html()->form()->close() }}
                     <div class="d-flex pt-2">
                         <strong class="text-dark mr-2">Share on:</strong>
                         <div class="d-inline-flex">
@@ -118,8 +126,7 @@
             <div class="col">
                 <div class="bg-light p-30">
                     <div class="nav nav-tabs mb-4">
-                        <a class="nav-item nav-link text-dark active" data-toggle="tab"
-                            href="#tab-pane-1">Description</a>
+                        <a class="nav-item nav-link text-dark active" data-toggle="tab" href="#tab-pane-1">Description</a>
                         <a class="nav-item nav-link text-dark" data-toggle="tab" href="#tab-pane-3">Reviews (0)</a>
                     </div>
                     <div class="tab-content">
