@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8">
     <title>MultiShop - Online Shop Website Template</title>
-    @vite(['resources/views/themes/assets/js/app.js','resources/views/themes/assets/scss/style.scss', 'resources/views/themes/assets/css/style.css'])
+    @vite(['resources/views/themes/assets/js/main.js', 'resources/views/themes/assets/js/app.js','resources/views/themes/assets/scss/style.scss', 'resources/views/themes/assets/css/style.css'])
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
@@ -61,7 +61,8 @@
     <script src="mail/contact.js"></script>
 
     <!-- Template Javascript -->
-    <script src="js/main.js"></script>
+    <script src="{{ asset('assets/js/main.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
 </body>
 
 </html>

@@ -117,7 +117,7 @@ class CartRepository implements CartRepositoryInterface
             'discount_amount' => $discountAmount,
             'discount_percent' => $discountPercent,
             'grand_total' => $grandTotal,
-            // 'total_weight' => $totalWeight,
+            'total_weight' => $totalWeight,
         ]);
     }
 }

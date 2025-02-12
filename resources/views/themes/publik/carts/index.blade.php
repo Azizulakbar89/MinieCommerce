@@ -101,7 +101,7 @@
     </div>
     <!-- Cart End -->
 @endsection
-
+<script src="{{ asset('assets/js/main.js') }}"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         // Fungsi untuk mengurangi nilai qty

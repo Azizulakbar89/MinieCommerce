@@ -99,5 +99,32 @@
         }
         button.parent().parent().find('input').val(newVal);
     });
+
+
+    $('.courier-code').click(function(){
+        let courier = $(this).val();
+        let addressID = $('.delivery-address:checked').val();
+
+        console.log('Selected Courier:', courier);
+        console.log('Selected Address ID:', addressID);
+
+        $.ajax({
+            url: "/orders/shipping",
+            method: "POST",
+            data: {
+                address_id: addressID,
+                courier: courier,
+                _token: $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(result) {
+                $('.available-services').show();
+                $('.available-services').html(result);
+            },
+            error: function(e) {
+                console.log(e);
+            }
+        })
+    });
+    
     
 })(jQuery);
